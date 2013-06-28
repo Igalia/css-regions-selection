@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script>
+        document.onmouseup = getSelectedText;
+
+        function getSelectedText(e)
+        {
+            var container = document.getElementById("selected-text");
+            container.innerHTML = "";
+
+            var sel = window.getSelection();
+            if (sel.rangeCount)
+            {
+                for (var i = 0, len = sel.rangeCount; i < len; ++i)
+                    container.innerHTML += sel.getRangeAt(i).toString();
+            }
+
+            if (container.innerHTML == "")
+                container.innerHTML = "Nothing selected";
+        }
+    </script>
+
+    <style>
+        #source1 {
+            -webkit-flow-into: content1;
+        }
+
+        #source2 {
+            -webkit-flow-into: content2;
+        }
+
+        .region {
+            width: 600px;
+            height: 100px;
+            background-color: lightgray;
+            margin: 5px;
+        }
+
+        #region1 {
+            -webkit-flow-from: content1;
+        }
+
+        #region2 {
+            -webkit-flow-from: content2;
+        }
+
+        #region3 {
+            -webkit-flow-from: content1;
+        }
+
+        #outside-region {
+            width: 600px;
+        }
+
+        .token {
+            color: blue;
+            font-weight: bold;
+        }
+
+        #selected-text {
+            width: 600px;
+            font-family: Courier;
+            font-size: 10pt;
+            height: 400px;
+            margin-top: 10px;
+            border: 1px solid black;
+        }
+
+        span.break {
+            -webkit-region-break-before: always;
+            display: block;
+        }
+
+        strong.fail {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h1>2 named flows (with 2 sources) splitted in 3 regions (1 named-flow in 2 regions and the other in 1 region in the middle of the previous ones)</h1>
+        <ul>
+            <li>Test 1: Select the text from word2 to word5</li>
+            <ul>
+                <li>Expected: Select text from word2 to word3 (only text from the named flow inside the region)</li>
+                <li>Actual: Select text from word2 to word3, text from word7 to word9 and then text from word4 to word5 <strong class="fail">FAIL</strong></li>
+                <li>Visual: <strong>OK</strong></li>
+            </ul>
+            <li>Test 2: Select the text from word5 to word8</li>
+            <ul>
+                <li>Expected: Select text from word5 to word6 (only text outside the regions)</li>
+                <li>Actual: Select text from the word following word8 to word9 and then text from word4 to the word previous to word5 <strong class="fail">FAIL</strong></li>
+                <li>Visual: <strong>OK</strong></li>
+            </ul>
+            <li>Test 3: Select the text from word2 to word8</li>
+            <ul>
+                <li>Expected: Select text from word2 to word3 and from word7 to word8 (only text from the named flow inside the regions)</li>
+                <li>Actual: <strong>OK</strong></li>
+                <li>Visual: <strong>OK</strong></li>
+            </ul>
+            <li>Test 4: Select all</li>
+            <ul>
+                <li>Expected: Select text from word1 to word3 and from word7 to word9 (the named flow in both regions) and then text from word4 to word6 (outside the regions)</li>
+                <li>Actual: <strong>OK</strong></li>
+                <li>Visual: <strong>OK</strong></li>
+            </ul>
+        </ul>
+    </div>
+
+    <hr />
+
+    <div id="source1">
+        <span class="token">word1</span>
+        named-flow-1 source-1 region-1 named-flow-1 source-1 region-1 named-flow-1 source-1 region-1 named-flow-1 source-1 region-1 named-flow-1 source-1 region-1
+        <span class="token">word2</span>
+        named-flow-1 source-1 region-1 named-flow-1 source-1 region-1 named-flow-1 source-1 region-1 named-flow-1 source-1 region-1 named-flow-1 source-1 region-1
+        <span class="token">word3</span>
+        <span class="break"></span>
+        <span class="token">word7</span>
+        named-flow-1 source-1 region-3 named-flow-1 source-1 region-3 named-flow-1 source-1 region-3 named-flow-1 source-1 region-3 named-flow-1 source-1 region-3
+        <span class="token">word8</span>
+        named-flow-1 source-1 region-3 named-flow-1 source-1 region-3 named-flow-1 source-1 region-3 named-flow-1 source-1 region-3 named-flow-1 source-1 region-3
+        <span class="token">word9</span>
+    </div>
+
+    <div id="source2">
+        <span class="token">word4</span>
+        named-flow-2 source-2 region-2 named-flow-2 source-2 region-2 named-flow-2 source-2 region-2 named-flow-2 source-2 region-2 named-flow-2 source-2 region-2
+        <span class="token">word5</span>
+        named-flow-2 source-2 region-2 named-flow-2 source-2 region-2 named-flow-2 source-2 region-2 named-flow-2 source-2 region-2 named-flow-2 source-2 region-2
+        <span class="token">word6</span>
+    </div>
+
+    <div class="region" id="region1"></div>
+    <div class="region" id="region2"></div>
+    <div class="region" id="region3"></div>
+
+    <div id="selected-text">Nothing selected</div>
+</body>
+</html>

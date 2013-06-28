@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script>
+        document.onmouseup = getSelectedText;
+
+        function getSelectedText(e)
+        {
+            var container = document.getElementById("selected-text");
+            container.innerHTML = "";
+
+            var sel = window.getSelection();
+            if (sel.rangeCount)
+            {
+                for (var i = 0, len = sel.rangeCount; i < len; ++i)
+                    container.innerHTML += sel.getRangeAt(i).toString();
+            }
+
+            if (container.innerHTML == "")
+                container.innerHTML = "Nothing selected";
+        }
+    </script>
+
+    <style>
+        #source {
+            -webkit-flow-into: content;
+        }
+
+        .region {
+            width: 600px;
+            height: 100px;
+            background-color: lightgray;
+            -webkit-flow-from: content;
+            margin: 5px;
+        }
+
+        #outside-region {
+            width: 600px;
+        }
+
+        .token {
+            color: blue;
+            font-weight: bold;
+        }
+
+        #selected-text {
+            width: 600px;
+            font-family: Courier;
+            font-size: 10pt;
+            height: 400px;
+            margin-top: 10px;
+            border: 1px solid black;
+        }
+
+        span.break {
+            -webkit-region-break-before: always;
+            display: block;
+        }
+
+        strong.fail {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h1>1 named flow (with 1 source) in 1 region wrapped by 2 texts</h1>
+        <ul>
+            <li>Test 1: Select the text from word2 to word5</li>
+            <ul>
+                <li>Expected: Selected text from word2 to word3 (only text outside the region)</li>
+                <li>Actual: Selected text from the word following word5 to word6 and then text from word1 to the word previous to word2 <strong class="fail">FAIL</strong></li>
+                <li>Visual: <strong>OK</strong></li>
+            </ul>
+            <li>Test 2: Select the text from word5 to word8</li>
+            <ul>
+                <li>Expected: Selected text from word5 to word6 (only text inside the region)</li>
+                <li>Actual: Selected text from word5 to word6, from word1 to word3 and from word7 to word9 <strong class="fail">FAIL</strong></li>
+                <li>Visual: <strong>OK</strong></li>
+            </ul>
+            <li>Test 3: Select the text from word2 through word8</li>
+            <ul>
+                <li>Expected: Selected text from word2 to word3 and from word7 to word8 (only text outside the region)</li>
+                <li>Actual: <strong>OK</strong></li>
+                <li>Visual: Selected text from word2 to to word8 (including text inside the region) <strong class="fail">FAIL</strong></li>
+            </ul>
+            <li>Test 4: Select all</li>
+            <ul>
+                <li>Expected: Select text from word4 to word6 (region) and from word1 to word3 and from word7 to word9 (outside the region)</li>
+                <li>Actual: <strong>OK</strong></li>
+                <li>Visual: <strong>OK</strong></li>
+            </ul>
+        </ul>
+    </div>
+
+    <hr />
+
+    <div id="source">
+        <span class="token">word4</span>
+        named-flow-1 source-1 region-1 named-flow-1 source-1 region-1 named-flow-1 source-1 region-1 named-flow-1 source-1 region-1 named-flow-1 source-1 region-1
+        <span class="token">word5</span>
+        named-flow-1 source-1 region-1 named-flow-1 source-1 region-1 named-flow-1 source-1 region-1 named-flow-1 source-1 region-1 named-flow-1 source-1 region-1
+        <span class="token">word6</span>
+    </div>
+
+    <div id="outside-region">
+        <span class="token">word1</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span class="token">word2</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span class="token">word3</span>
+    </div>
+
+    <div class="region"></div>
+
+    <div id="outside-region">
+        <span class="token">word7</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span class="token">word8</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span class="token">word9</span>
+    </div>
+
+    <div id="selected-text"></div>
+
+</body>
+</html>
