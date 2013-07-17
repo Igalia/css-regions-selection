@@ -8,12 +8,16 @@
         function getSelectedText(e)
         {
             var container = document.getElementById("selected-text");
+            container.innerHTML = "";
 
             var sel = window.getSelection();
-            if (sel.toString() == "")
+            if (sel.rangeCount)
+            {
+                for (var i = 0, len = sel.rangeCount; i < len; ++i)
+                    container.innerHTML += sel.getRangeAt(i).toString();
+            }
+            if (container.innerHTML == "")
                 container.innerHTML = "Nothing selected";
-            else
-                container.innerHTML = sel.toString();
         }
     </script>
 
