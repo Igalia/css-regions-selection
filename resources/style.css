@@ -1,0 +1,30 @@
+.region {
+    width: 600px;
+    height: 100px;
+    background-color: lightgray;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.outside-region {
+    width: 600px;
+}
+
+.token {
+    color: blue;
+    font-weight: bold;
+}
+
+.mark {
+    color: red;
+    font-weight: bold;
+}
+
+#selected-text {
+    width: 600px;
+    height: 400px;
+    font-family: monospace;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}

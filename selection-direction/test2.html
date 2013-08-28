@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="../resources/debug.js"></script>
+    <link rel="stylesheet" type="text/css" href="../resources/style.css"></link>
+
+    <style>
+        #first {
+            position: absolute;
+            top: 0px;
+        }
+
+        #middle {
+            position: absolute;
+            top: 150px;
+        }
+
+        #last {
+            position: absolute;
+            top: 300px;
+        }
+
+        #selected-text {
+            position: absolute;
+            top: 450px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="middle" class="region">
+        <span id="word4" class="token">word4</span>
+        inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region
+        <span id="word5" class="token">word5</span>
+        inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region
+        <span id="word6" class="token">word6</span>
+    </div>
+
+    <div id="first" class="outside-region">
+        <span id="word1" class="token">word1</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word2" class="token">word2</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word3" class="token">word3</span>
+    </div>
+
+    <div id="last" class="outside-region">
+        <span id="word7" class="token">word7</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word8" class="token">word8</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word9" class="token">word9</span>
+    </div>
+
+    <div id="selected-text"></div>
+
+</body>
+</html>
