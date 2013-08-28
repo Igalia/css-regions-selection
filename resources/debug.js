@@ -38,15 +38,12 @@ function getSelectedText()
     }
 }
 
-function selectionExample() {
+function select(fromId, toId) {
     var sel = window.getSelection();
 
-    var base = document.getElementById("word2");
-    var extent = document.getElementById("word5");
+    var base = document.getElementById(fromId);
+    var extent = document.getElementById(toId);
     sel.setBaseAndExtent(base, 0, extent, 0);
-
-    getSelectedText();
 }
 
 document.onmouseup = getSelectedText;
-window.onload = selectionExample;
