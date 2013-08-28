@@ -15,7 +15,12 @@
     font-weight: bold;
 }
 
-.mark {
+.ok {
+    color: green;
+    font-weight: bold;
+}
+
+.mark, .fail {
     color: red;
     font-weight: bold;
 }
