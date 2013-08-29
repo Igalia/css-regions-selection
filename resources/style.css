@@ -33,3 +33,7 @@
     padding: 10px;
     border: 1px solid black;
 }
+
+.tests {
+    display: none;
+}

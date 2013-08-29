@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="resources/debug.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/style.css"></link>
+
+    <style>
+        #source {
+            -webkit-flow-into: content;
+        }
+
+        #region {
+            -webkit-flow-from: content;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>Use Case A</h1>
+        <h2>Description</h2>
+        <ul>
+            <li>
+                <p>HTML:</p>
+                <pre><code>source
+outside-region-1
+region
+outside-region-2</code></pre>
+            </li>
+            <li>
+                <p>Visual:</p>
+                <pre><code>outside-region-1
+region (source)
+outside-region-2</code></pre>
+            </li>
+        </ul>
+        <h2>Tests</h2>
+        <h3><a href="#" onClick="showHideTests('selection-direction-tests');">Selection direction</a></h3>
+        <ul id="selection-direction-tests" class="tests">
+            <li><strong>Test A.1</strong>: Select the text from <span class="token">word2</span> to <span class="token">word5</span></li>
+            <ul>
+                <li>Rendering: <span class="fail">FAIL</span></li>
+                <li>Content: <span class="ok">OK</span></li>
+                <li>Expected: Select content from next element to <span class="token">word5</span> till <span class="token">word6</span> and from <span class="token">word1</span> to previous element to <span class="token">word2</span>.
+                <li>Explanation: <em>Extent</em> position is in the <em>region</em> and points to <span class="token">word5</span> inside <tt>source</tt> node in the <em>DOM Tree</em>. And <tt>source</tt> node is before <tt>outside-region-1</tt> node which contains <em>base</em> position (<span class="token">word2</span>). So <em>start</em> is set to <em>extent</em> and <em>end</em> to <em>base</em>.</li>
+            </ul>
+         </ul>
+        <h3><a href="#" onClick="showHideTests('highlight-content-mismatch');">Highlight content mismatch</a></h3>
+        <ul id="highlight-content-mismatch" class="tests">
+            <li><strong>Test A.2</strong>: Select from <span class="token">word5</span> to the end of the <em>region</em> and move mouse out of <em>region</em> to the right.</li>
+            <ul>
+                <li>Rendering: <span class="ok">OK</span></li>
+                <li>Content: <span class="fail">FAIL</span></li>
+                <li>Expected: Select content from <span class="token">word5</span> to <span class="token">word6</span>.</li>
+                <li>Explanation: <em>Extent</em> position is set to <tt>region</tt>. As you're starting to select in the <tt>source</tt> node the <tt>outside-region-1</tt> text is also included in the content of the selection. It should keep the <em>extent</em> at the end of the <tt>source</tt></li>
+            </ul>
+            <li><strong>Test A.3</strong>: Select from <span class="token">word5</span> to the end of the <em>region</em> and move mouse out of <em>region</em> to the right and move down.</li>
+            <ul>
+                <li>Rendering: <span class="ok">OK</span></li>
+                <li>Content: <span class="fail">FAIL</span></li>
+                <li>Expected: Select content from <span class="token">word5</span> to <span class="token">word6</span>.</li>
+                <li>Explanation: <em>Extent</em> position is set to <tt>outside-region-2</tt>. As you're starting to select in the <tt>source</tt> node the <tt>outside-region-1</tt> text is also included in the content of the selection. It should keep the <em>extent</em> at the end of the <tt>source</tt></li>
+            </ul>
+        </ul>
+        <h3><a href="#" onClick="showHideTests('wrong-block-gaps');">Wrong block gaps</a></h3>
+        <ul id="wrong-block-gaps" class="tests">
+            <li><strong>Test A.4</strong>: Select from <span class="token">word2</span> to <span class="token">word8</span>.</li>
+            <ul>
+                <li>Rendering: <span class="fail">FAIL</span></li>
+                <li>Content: <span class="ok">OK</span></li>
+                <li>Expected: Select from <span class="token">word2</span> to <span class="token">word3</span> and from <span class="token">word7</span> to <span class="token">word8</span>.</li>
+                <li>Explanation: It fills the gaps from <tt>outside-region-1</tt> to <tt>outside-region-2</tt> but it doesn't take into account the <tt>source</tt> element rendered inside the <em>region</em> in order to skip it.</li>
+            </ul>
+        </ul>
+        <h3><a href="#" onClick="showHideTests('selection-clearing');">Selection clearing</a></h3>
+        <ul id="selection-clearing" class="tests">
+            <li><strong>Test A.5</strong>: Select from <span class="token">word2</span> to <span class="token">word5</span>. Then click out of the highlighted text to clear the selection.</li>
+            <ul>
+                <li>Rendering: <span class="fail">FAIL</span></li>
+                <li>Content: <span class="ok">OK</span></li>
+                <li>Expected: Clear the selection and the highlighted text.</li>
+                <li>Explanation: Due to some wrong block gaps filling, the clear algorithm is not able to reach all the <em>LayoutRects</em> painted during the selection.</li>
+            </ul>
+        </ul>
+    </div>
+
+    <hr />
+
+    <div id="source">
+        <span id="word4" class="token">word4</span>
+        inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region
+        <span id="word5" class="token">word5</span>
+        inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region
+        <span id="word6" class="token">word6</span>
+    </div>
+
+    <div id="outside-region-1" class="outside-region">
+        <span id="word1" class="token">word1</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word2" class="token">word2</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word3" class="token">word3</span>
+    </div>
+
+    <div id="region" class="region"></div>
+
+    <div id="outside-region-2" class="outside-region">
+        <span id="word7" class="token">word7</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word8" class="token">word8</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word9" class="token">word9</span>
+    </div>
+
+    <div id="selected-text"></div>
+
+</body>
+</html>

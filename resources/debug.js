@@ -47,3 +47,8 @@ function select(fromId, toId) {
 }
 
 document.onmouseup = getSelectedText;
+
+function showHideTests(id) {
+    var style = document.getElementById(id).style;
+    style.display = (!style.display || style.display == "none") ? "block" : "none";
+}
