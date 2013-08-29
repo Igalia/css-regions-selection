@@ -28,13 +28,11 @@
         </ul>
       </header>
       <section>
+
         <h1><a name="css-regions-selection-use-cases" class="anchor" href="#css-regions-selection-use-cases"><span class="octicon octicon-link"></span></a>CSS Regions Selection Use Cases</h1>
 
-        <h2><a name="selection-direction" class="anchor" href="#selection-direction"><span class="octicon octicon-link"></span></a>Selection direction</h2>
-        <p>As soon as selection crosses the <em>Region</em> boundaries, the highlighted area changes in a way that the whole page, except the area selected by the user, is actually painted.</p>
+        <h2><a name="use-case-a" class="anchor" href="#use-case-a"><span class="octicon octicon-link"></span></a>Use Case A</h2>
         <ul>
-          <li><p><a href="https://rawgithub.com/Igalia/css-regions-selection/master/selection-direction/test-regions.html">Regions</a> (<a href="https://github.com/Igalia/css-regions-selection/blob/master/selection-direction/test-regions.html">source code</a>)</p></li>
-          <li><p><a href="https://rawgithub.com/Igalia/css-absolute-selection/master/selection-direction/test-absolute.html">Absolute positions</a> (<a href="https://github.com/Igalia/css-absolute-selection/blob/master/selection-direction/test-absolute.html">source code</a>)</p></li>
           <li>
             <p>HTML:</p>
             <pre><code>source
@@ -43,20 +41,26 @@ region
 outside-region-2
 </code></pre>
           </li>
+          <li><p><a href="https://rawgithub.com/Igalia/css-regions-selection/master/use-case-a.html">Regions</a> (<a href="https://github.com/Igalia/css-regions-selection/blob/master/use-case-a.html">source code</a>)</p></li>
+          <li><p><a href="https://rawgithub.com/Igalia/css-regions-selection/master/selection-direction/use-case-a-absolute.html">Absolute positions</a> (<a href="https://github.com/Igalia/css-regions-selection/blob/master/use-case-a-absolute.html">source code</a>)</p></li>
+        </ul>
+
+        <h2><a name="use-case-b" class="anchor" href="#use-case-b"><span class="octicon octicon-link"></span></a>Use Case B</h2>
+        <ul>
           <li>
-            <p>Visual:</p>
+            <p>HTML:</p>
             <pre><code>outside-region-1
-region (source)
+source
+region
 outside-region-2
 </code></pre>
           </li>
+          <li><p><a href="https://rawgithub.com/Igalia/css-regions-selection/master/use-case-b.html">Regions</a> (<a href="https://github.com/Igalia/css-regions-selection/blob/master/use-case-b.html">source code</a>)</p></li>
+          <li><p><a href="https://rawgithub.com/Igalia/css-regions-selection/master/selection-direction/use-case-b-absolute.html">Absolute positions</a> (<a href="https://github.com/Igalia/css-regions-selection/blob/master/use-case-b-absolute.html">source code</a>)</p></li>
         </ul>
 
-        <h2><a name="highlight-content-mismatch" class="anchor" href="#highlight-content-mismatch"><span class="octicon octicon-link"></span></a>Highlight content mismatch</h2>
-        <p>In certain scenarios, the highlighted area doesn't match the selected content.</p>
+        <h2><a name="use-case-c" class="anchor" href="#use-case-c"><span class="octicon octicon-link"></span></a>Use Case C</h2>
         <ul>
-          <li><p><a href="https://rawgithub.com/Igalia/css-regions-selection/master/highlight-content-mismatch/test-regions.html">Regions</a> (<a href="https://github.com/Igalia/css-regions-selection/blob/master/highlight-content-mismatch/test-regions.html">source code</a>)</p></li>
-          <li><p><a href="https://rawgithub.com/Igalia/css-absolute-selection/master/highlight-content-mismatch/test-absolute.html">Absolute positions</a> (<a href="https://github.com/Igalia/css-absolute-selection/blob/master/highlight-content-mismatch/test-absolute.html">source code</a>)</p></li>
           <li>
             <p>HTML:</p>
             <pre><code>outside-region-1
@@ -65,13 +69,8 @@ outside-region-2
 region
 </code></pre>
           </li>
-          <li>
-            <p>Visual:</p>
-            <pre><code>outside-region-1
-outside-region-2
-region (source)
-</code></pre>
-          </li>
+          <li><p><a href="https://rawgithub.com/Igalia/css-regions-selection/master/use-case-c.html">Regions</a> (<a href="https://github.com/Igalia/css-regions-selection/blob/master/use-case-c.html">source code</a>)</p></li>
+          <li><p><a href="https://rawgithub.com/Igalia/css-regions-selection/master/selection-direction/use-case-c-absolute.html">Absolute positions</a> (<a href="https://github.com/Igalia/css-regions-selection/blob/master/use-case-c-absolute.html">source code</a>)</p></li>
         </ul>
 
       </section>
