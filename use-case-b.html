@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="resources/debug.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/style.css"></link>
+
+    <style>
+        #source {
+            -webkit-flow-into: content;
+        }
+
+        #region {
+            -webkit-flow-from: content;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>Use Case B - Regions</h1>
+        See <a href="use-case-b-absolute.html">Absolute positions</a> example.
+        <h2>HTML</h2>
+        <pre><code>outside-region-1
+source
+region
+outside-region-2</code></pre>
+        <h2>Tests</h2>
+        <h3><a href="#" onClick="showHideTests('highlight-content-mismatch');">Highlight content mismatch</a></h3>
+        <ul id="highlight-content-mismatch" class="tests">
+            <li><strong>Test B.1</strong>: Select from <span class="token">word2</span> to the end <tt>outside-text-1</tt> and move mouse out of <em>region</em> to the right and down.</li>
+            <ul>
+                <li>Rendering: <span class="ok">OK</span></li>
+                <li>Content: <span class="fail">FAIL</span></li>
+                <li>Expected: Select content from <span class="token">word2</span> to <span class="token">word3</span>.</li>
+                <li>Explanation: <em>Extent</em> position is set to <tt>region</tt>. Like <tt>source</tt> element is between <tt>outside-region-1</tt> and <tt>outside-region-2</tt> in the <em>DOM Tree</em>. Then it gets all the content of <tt>source</tt> in the selection. It should keep the <em>extent</em> position at the of <tt>outside-region-1</tt>.</li>
+            </ul>
+        </ul>
+        <h3><a href="#" onClick="showHideTests('wrong-block-gaps');">Wrong block gaps</a></h3>
+        <ul id="wrong-block-gaps" class="tests">
+            <li><strong>Test B.2</strong>: Select from <span class="token">word2</span> to <span class="token">word5</span>.</li>
+            <ul>
+                <li>Rendering: <span class="fail">FAIL</span></li>
+                <li>Content: <span class="ok">OK</span></li>
+                <li>Expected: Select from <span class="token">word2</span> to <span class="token">word3</span> and from <span class="token">word4</span> to <span class="token">word5</span>.</li>
+                <li>Explanation: Fills the block gaps of the selection to the bottom of the document which is wrong.</li>
+            </ul>
+        </ul>
+    </div>
+
+    <hr />
+
+    <div id="outside-region-1" class="outside-region">
+        <span id="word1" class="token">word1</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word2" class="token">word2</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word3" class="token">word3</span>
+    </div>
+
+    <div id="source">
+        <span id="word4" class="token">word4</span>
+        inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region
+        <span id="word5" class="token">word5</span>
+        inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region
+        <span id="word6" class="token">word6</span>
+    </div>
+
+    <div id="region" class="region"></div>
+
+    <div id="outside-region-2" class="outside-region">
+        <span id="word7" class="token">word7</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word8" class="token">word8</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word9" class="token">word9</span>
+    </div>
+
+    <div id="selected-text"></div>
+
+</body>
+</html>

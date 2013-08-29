@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="resources/debug.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/style.css"></link>
+
+    <style>
+        #source {
+            -webkit-flow-into: content;
+        }
+
+        #region {
+            -webkit-flow-from: content;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>Use Case C - Regions</h1>
+        See <a href="use-case-c-absolute.html">Absolute positions</a> example.
+        <h2>HTML</h2>
+        <pre><code>outside-region-1
+source
+outside-region-2
+region</code></pre>
+        <h2>Tests</h2>
+        <h3><a href="#" onClick="showHideTests('highlight-content-mismatch');">Highlight content mismatch</a></h3>
+        <ul id="highlight-content-mismatch" class="tests">
+            <li><strong>Test C.1</strong>: Select from <span class="token">word2</span> to <span class="token">word5</span>.</li>
+            <ul>
+                <li>Rendering: <span class="ok">FAIL</span></li>
+                <li>Content: <span class="fail">OK</span></li>
+                <li>Expected: Select content from <span class="token">word2</span> to <span class="token">word3</span>, from <span class="token">word7</span> to <span class="token">word9</span> and <span class="token">word4</span> to <span class="token">word5</span>.</li>
+                <li>Explanation: Following the <em>DOM Tree</em> the selection includes the <em>source</em> content, however it is not highlighted.</li>
+            </ul>
+            <li><strong>Test A.3</strong>: Select from <span class="token">word2</span> to just before <span class="token">word4</span> (the beggining of <em>outside-region-2</em>).</li>
+            <ul>
+                <li>Rendering: <span class="ok">OK</span></li>
+                <li>Content: <span class="fail">FAIL</span></li>
+                <li>Expected: Select content from <span class="token">word2</span> to <span class="token">word3</span>.</li>
+                <li>Explanation: <em>Extent</em> position is set to <tt>outside-region-2</tt>. As you're starting to select in <tt>outside-region-1</tt> node and the <tt>source</tt> node is before <tt>outside-region-2</tt>, the text from <tt>source</tt> is also included in the content of the selection. It should keep the <em>extent</em> at the end of the <tt>outside-region-1</tt>.</li>
+            </ul>
+        </ul>
+        <h3><a href="#" onClick="showHideTests('wrong-block-gaps');">Wrong block gaps</a></h3>
+        <ul id="wrong-block-gaps" class="tests">
+            <li><strong>Test C.2</strong>: Select from <span class="token">word2</span> to <span class="token">word8</span>.</li>
+            <ul>
+                <li>Rendering: <span class="fail">FAIL</span></li>
+                <li>Content: <span class="ok">OK</span></li>
+                <li>Expected: Select from <span class="token">word2</span> to <span class="token">word3</span> and from <span class="token">word7</span> to <span class="token">word8</span>.</li>
+                <li>Explanation: It fills the gaps from <tt>outside-region-1</tt> to <tt>source</tt> but it doesn't take into account the <tt>outside-region-2</tt> element should be skipped in the highlighting.</li>
+            </ul>
+        </ul>
+    </div>
+
+    <hr />
+
+    <div id="outside-region-1" class="outside-region">
+        <span id="word1" class="token">word1</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word2" class="token">word2</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word3" class="token">word3</span>
+    </div>
+
+    <div id="source">
+        <span id="word7" class="token">word7</span>
+        inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region
+        <span id="word8" class="token">word8</span>
+        inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region
+        <span id="word9" class="token">word9</span>
+    </div>
+
+    <div id="outside-region-2" class="outside-region">
+        <span id="word4" class="token">word4</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word5" class="token">word5</span>
+        outside region outside region outside region outside region outside region outside region outside region outside region outside region
+        <span id="word6" class="token">word6</span>
+    </div>
+
+    <div id="region" class="region"></div>
+
+    <div id="selected-text"></div>
+
+</body>
+</html>

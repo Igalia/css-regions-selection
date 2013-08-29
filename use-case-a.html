@@ -18,23 +18,13 @@
 <body>
 
     <div>
-        <h1>Use Case A</h1>
-        <h2>Description</h2>
-        <ul>
-            <li>
-                <p>HTML:</p>
-                <pre><code>source
+        <h1>Use Case A - Regions</h1>
+        See <a href="use-case-a-absolute.html">Absolute positions</a> example.
+        <h2>HTML</h2>
+        <pre><code>source
 outside-region-1
 region
 outside-region-2</code></pre>
-            </li>
-            <li>
-                <p>Visual:</p>
-                <pre><code>outside-region-1
-region (source)
-outside-region-2</code></pre>
-            </li>
-        </ul>
         <h2>Tests</h2>
         <h3><a href="#" onClick="showHideTests('selection-direction-tests');">Selection direction</a></h3>
         <ul id="selection-direction-tests" class="tests">
@@ -53,14 +43,14 @@ outside-region-2</code></pre>
                 <li>Rendering: <span class="ok">OK</span></li>
                 <li>Content: <span class="fail">FAIL</span></li>
                 <li>Expected: Select content from <span class="token">word5</span> to <span class="token">word6</span>.</li>
-                <li>Explanation: <em>Extent</em> position is set to <tt>region</tt>. As you're starting to select in the <tt>source</tt> node the <tt>outside-region-1</tt> text is also included in the content of the selection. It should keep the <em>extent</em> at the end of the <tt>source</tt></li>
+                <li>Explanation: <em>Extent</em> position is set to <tt>region</tt>. As you're starting to select in the <tt>source</tt> node the <tt>outside-region-1</tt> text is also included in the content of the selection. It should keep the <em>extent</em> at the end of the <tt>source</tt>.</li>
             </ul>
             <li><strong>Test A.3</strong>: Select from <span class="token">word5</span> to the end of the <em>region</em> and move mouse out of <em>region</em> to the right and move down.</li>
             <ul>
                 <li>Rendering: <span class="ok">OK</span></li>
                 <li>Content: <span class="fail">FAIL</span></li>
                 <li>Expected: Select content from <span class="token">word5</span> to <span class="token">word6</span>.</li>
-                <li>Explanation: <em>Extent</em> position is set to <tt>outside-region-2</tt>. As you're starting to select in the <tt>source</tt> node the <tt>outside-region-1</tt> text is also included in the content of the selection. It should keep the <em>extent</em> at the end of the <tt>source</tt></li>
+                <li>Explanation: <em>Extent</em> position is set to <tt>outside-region-2</tt>. As you're starting to select in the <tt>source</tt> node the <tt>outside-region-1</tt> text is also included in the content of the selection. It should keep the <em>extent</em> at the end of the <tt>source</tt>.</li>
             </ul>
         </ul>
         <h3><a href="#" onClick="showHideTests('wrong-block-gaps');">Wrong block gaps</a></h3>
