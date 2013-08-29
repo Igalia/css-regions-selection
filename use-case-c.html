@@ -43,16 +43,6 @@ region</code></pre>
                 <li>Explanation: <em>Extent</em> position is set to <tt>outside-region-2</tt>. As you're starting to select in <tt>outside-region-1</tt> node and the <tt>source</tt> node is before <tt>outside-region-2</tt>, the text from <tt>source</tt> is also included in the content of the selection. It should keep the <em>extent</em> at the end of the <tt>outside-region-1</tt>.</li>
             </ul>
         </ul>
-        <h3><a href="#" onClick="showHideTests('wrong-block-gaps');">Wrong block gaps</a></h3>
-        <ul id="wrong-block-gaps" class="tests">
-            <li><strong>Test C.3</strong>: Select from <span class="token">word2</span> to <span class="token">word8</span>.</li>
-            <ul>
-                <li>Rendering: <span class="fail">FAIL</span></li>
-                <li>Content: <span class="ok">OK</span></li>
-                <li>Expected: Select from <span class="token">word2</span> to <span class="token">word3</span> and from <span class="token">word7</span> to <span class="token">word8</span>.</li>
-                <li>Explanation: It fills the gaps from <tt>outside-region-1</tt> to <tt>source</tt> but it doesn't take into account the <tt>outside-region-2</tt> element should be skipped in the highlighting.</li>
-            </ul>
-        </ul>
     </div>
 
     <hr />
