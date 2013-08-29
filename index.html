@@ -37,17 +37,39 @@
           <li><p><a href="https://rawgithub.com/Igalia/css-absolute-selection/master/selection-direction/test-absolute.html">Absolute positions</a> (<a href="https://github.com/Igalia/css-absolute-selection/blob/master/selection-direction/test-absolute.html">source code</a>)</p></li>
           <li>
             <p>HTML:</p>
-            <pre><code>source-1 named-flow-1
-text-1
-region-1 named-flow-1
-text-2
+            <pre><code>source
+outside-region-1
+region
+outside-region-2
 </code></pre>
           </li>
           <li>
             <p>Visual:</p>
-            <pre><code>text-1
-region-1 named-flow-1 source-1
-text-2
+            <pre><code>outside-region-1
+region (source)
+outside-region-2
+</code></pre>
+          </li>
+        </ul>
+
+        <h2><a name="highlight-content-mismatch" class="anchor" href="#highlight-content-mismatch"><span class="octicon octicon-link">Highlight content mismatch</span></a></h2>
+        <p>In certain scenarios, the highlighted area doesn't match the selected content.</p>
+        <ul>
+          <li><p><a href="https://rawgithub.com/Igalia/css-regions-selection/master/highlight-content-mismatch/test-regions.html">Regions</a> (<a href="https://github.com/Igalia/css-regions-selection/blob/master/highlight-content-mismatch/test-regions.html">source code</a>)</p></li>
+          <li><p><a href="https://rawgithub.com/Igalia/css-absolute-selection/master/highlight-content-mismatch/test-absolute.html">Absolute positions</a> (<a href="https://github.com/Igalia/css-absolute-selection/blob/master/highlight-content-mismatch/test-absolute.html">source code</a>)</p></li>
+          <li>
+            <p>HTML:</p>
+            <pre><code>outside-region-1
+source
+outside-region-2
+region
+</code></pre>
+          </li>
+          <li>
+            <p>Visual:</p>
+            <pre><code>outside-region-1
+outside-region-2
+region (source)
 </code></pre>
           </li>
         </ul>
