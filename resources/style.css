@@ -4,10 +4,16 @@
     background-color: lightcyan;
     margin-top: 5px;
     margin-bottom: 5px;
+    border: 1px solid red;
+    margin: 5px;
+    padding: 5px;
 }
 
 .outside-region {
     width: 600px;
+    border: 1px solid green;
+    margin: 5px;
+    padding: 5px;
 }
 
 .token {
@@ -27,13 +33,37 @@
 
 #selected-text {
     width: 600px;
-    height: 400px;
+    height: 300px;
     font-family: monospace;
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid black;
+    border: 1px solid purple;
+    margin: 5px;
+    padding: 5px;
 }
 
 .tests {
     display: none;
+}
+
+html {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+}
+
+body {
+    border: 1px solid brown;
+    margin: 5px;
+    padding: 5px;
+}
+
+#description {
+    border: 1px solid grey;
+    margin: 5px;
+    padding: 5px;
+}
+
+#example {
+    border: 1px solid blue;
+    margin: 5px;
+    padding: 5px;
 }
