@@ -2,17 +2,15 @@
     width: 600px;
     height: 100px;
     background-color: lightcyan;
-    margin-top: 5px;
-    margin-bottom: 5px;
     border: 1px solid red;
-    margin: 5px;
+    margin: 20px 10px 20px 10px;
     padding: 5px;
 }
 
 .outside-region {
     width: 600px;
     border: 1px solid green;
-    margin: 5px;
+    margin: 10px;
     padding: 5px;
 }
 
@@ -36,7 +34,7 @@
     height: 300px;
     font-family: monospace;
     border: 1px solid purple;
-    margin: 5px;
+    margin: 10px;
     padding: 5px;
 }
 
@@ -46,24 +44,24 @@
 
 html {
     border: 1px solid black;
-    margin: 5px;
+    margin: 10px;
     padding: 5px;
 }
 
 body {
     border: 1px solid brown;
-    margin: 5px;
+    margin: 10px;
     padding: 5px;
 }
 
 #description {
     border: 1px solid grey;
-    margin: 5px;
+    margin: 10px;
     padding: 5px;
 }
 
 #example {
     border: 1px solid blue;
-    margin: 5px;
+    margin: 10px;
     padding: 5px;
 }

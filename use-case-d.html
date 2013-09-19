@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="resources/debug.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/style.css"></link>
+
+    <style>
+        #source {
+            -webkit-flow-into: content;
+        }
+
+        .region {
+            -webkit-flow-from: content;
+        }
+
+        span.break {
+            -webkit-region-break-before: always;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="description">
+        <h1>Use Case D - Regions</h1>
+        See <a href="use-case-d-absolute.html">Absolute positions</a> example.
+        <h2>HTML</h2>
+        <pre><code>source
+region-1
+outside-region
+region-2</code></pre>
+    </div>
+
+    <div id="example">
+
+        <div id="source">
+            <span id="word1" class="token">word1</span>
+            inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region
+            <span id="word2" class="token">word2</span>
+            inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region
+            <span id="word3" class="token">word3</span>
+            <span class="break"></span>
+            <span id="word7" class="token">word9</span>
+            inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region
+            <span id="word8" class="token">word8</span>
+            inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region
+            <span id="word9" class="token">word7</span>
+        </div>
+
+        <div id="region-1" class="region"></div>
+
+        <div id="outside-region" class="outside-region">
+            <span id="word4" class="token">word4</span>
+            outside region outside region outside region outside region outside region outside region outside region outside region outside region
+            <span id="word5" class="token">word5</span>
+            outside region outside region outside region outside region outside region outside region outside region outside region outside region
+            <span id="word6" class="token">word6</span>
+        </div>
+
+        <div id="region-2" class="region"></div>
+
+    </div>
+
+    <div id="selected-text"></div>
+
+</body>
+</html>
