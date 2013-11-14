@@ -46,9 +46,139 @@ function select(fromId, toId) {
     sel.setBaseAndExtent(base, 0, extent, 0);
 }
 
-document.onmouseup = getSelectedText;
-
 function showHideTests(id) {
     var style = document.getElementById(id).style;
     style.display = (!style.display || style.display == "none") ? "block" : "none";
+}
+
+document.onmouseup = getSelectedText;
+
+var counter = window.location.search.replace("?", "");
+if (!counter)
+    counter = 1000;
+
+var values = new Array();
+
+function selectText() {
+    var selection = window.getSelection();
+
+    var base = document.getElementById("word0");
+    var extent = document.getElementById("word" + (counter - 1));
+    var summary = document.getElementById("summary");
+    var average = document.getElementById("average");
+
+    // Reset selection
+    selection.setBaseAndExtent(summary, 0, summary, 0);
+
+    setTimeout(function() {
+        var start = new Date().getTime();
+        selection.setBaseAndExtent(base, 0, extent, 0);
+        var end = new Date().getTime();
+
+        var time = end - start;
+
+        values.push(time);
+
+        var tr = document.createElement("tr");
+        tr.innerHTML = "<th>Time<sup>" + values.length + "</sup></th><td class=\"time\">" + time + " ms</td>";
+        summary.appendChild(tr);
+
+        var sum = values.reduce(function(previousValue, currentValue) { return previousValue + currentValue; });
+        average.innerHTML = Math.round(sum / values.length) + " ms";
+    }, 500);
+}
+
+function fillDescription() {
+    var lastWord = document.getElementById("lastWord");
+    lastWord.innerHTML = "word" + (counter - 1);
+
+    var regularDivsCounter = document.getElementById("regularDivsCounter");
+    regularDivsCounter.innerHTML = counter / 2;
+    var regionsCounter = document.getElementById("regionsCounter");
+    regionsCounter.innerHTML = counter / 2;
+}
+
+function fillDescriptionNoRegions() {
+    var lastWord = document.getElementById("lastWord");
+    lastWord.innerHTML = "word" + (counter - 1);
+
+    var regularDivsCounter = document.getElementById("regularDivsCounter");
+    regularDivsCounter.innerHTML = counter;
+}
+
+function createRegionsDocument() {
+    var body = document.body;
+
+    for (var i = 0; i < counter; i += 2) {
+        var outDiv = document.createElement("div");
+        outDiv.className = "outside-region";
+
+        var word = document.createElement("span");
+        word.id = "word" + i;
+        word.className = "token";
+        word.innerHTML = "word" + i;
+
+        outDiv.appendChild(document.createTextNode("outside region outside region outside region outside region outside region outside region outside region outside region outside region "));
+        outDiv.appendChild(word);
+        outDiv.appendChild(document.createTextNode(" outside region outside region outside region outside region outside region outside region outside region outside region outside region"));
+
+        var inDiv = document.createElement("div");
+        inDiv.className = "region";
+
+        body.appendChild(outDiv);
+        body.appendChild(inDiv);
+    }
+
+    var source = document.createElement("div");
+    source.id = "source";
+
+    for (var i = 1; i < counter; i += 2) {
+        var word = document.createElement("span");
+        word.id = "word" + i;
+        word.className = "token";
+        word.innerHTML = "word" + i;
+
+        var breakDiv = document.createElement("div");
+        breakDiv.className = "break";
+
+        source.appendChild(document.createTextNode("inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region "));
+        source.appendChild(word);
+        source.appendChild(document.createTextNode(" inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region"));
+        source.appendChild(breakDiv);
+    }
+
+    body.appendChild(source);
+}
+
+function createNoRegionsDocument() {
+    var body = document.body;
+
+    for (var i = 0; i < counter; i += 2) {
+        var outDiv = document.createElement("div");
+        outDiv.className = "outside-region";
+
+        var word1 = document.createElement("span");
+        word1.id = "word" + i;
+        word1.className = "token";
+        word1.innerHTML = "word" + i;
+
+        outDiv.appendChild(document.createTextNode("outside region outside region outside region outside region outside region outside region outside region outside region outside region "));
+        outDiv.appendChild(word1);
+        outDiv.appendChild(document.createTextNode(" outside region outside region outside region outside region outside region outside region outside region outside region outside region"));
+
+        var inDiv = document.createElement("div");
+        inDiv.className = "region";
+
+        var word2 = document.createElement("span");
+        word2.id = "word" + (i + 1);
+        word2.className = "token";
+        word2.innerHTML = "word" + (i + 1);
+
+        inDiv.appendChild(document.createTextNode("inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region "));
+        inDiv.appendChild(word2);
+        inDiv.appendChild(document.createTextNode(" inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region"));
+
+        body.appendChild(outDiv);
+        body.appendChild(inDiv);
+    }
 }
