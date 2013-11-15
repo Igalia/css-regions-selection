@@ -28,7 +28,11 @@
         <h1>Performance test for selection in CSS Regions</h1>
         <p>Every time you click the <em>Select</em> button, the test performs a selection using JavaScript method <tt>setBaseAndExtent</tt> from <span class="token">word0</span> to <span class="token" id="lastWord"></span>. Then it shows the time requiered to execute the selection and calculates the average for all the selections done.</p>
         <p>By default this test has 1000 <tt>divs</tt> (500 regular <tt>divs</tt> and 500 regions) but you can modify this number with a <tt>GET</tt> param. For example, for 2000 <tt>divs</tt> you should add <tt>?2000</tt> to the URL (<a href="?2000">see link</a>).</p>
-        <p><button onClick="selectText();">Select</button></p>
+        <p>
+            <button onClick="selectText(1);">Select</button>
+            <button onClick="selectText(10);">Select (x10)</button>
+            <button onClick="selectText(20);">Select (x20)</button>
+        </p>
         <table id="summary">
             <tr><th>Number of regular <tt>divs</tt></th><td id="regularDivsCounter"></td></tr>
             <tr><th>Number of regions</th><td id="regionsCounter"></td></tr>

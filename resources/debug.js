@@ -59,7 +59,7 @@ if (!counter)
 
 var values = new Array();
 
-function selectText() {
+function selectText(repeat) {
     var selection = window.getSelection();
 
     var base = document.getElementById("word0");
@@ -85,6 +85,9 @@ function selectText() {
 
         var sum = values.reduce(function(previousValue, currentValue) { return previousValue + currentValue; });
         average.innerHTML = Math.round(sum / values.length) + " ms";
+
+        if (repeat > 1)
+            selectText(repeat - 1);
     }, 500);
 }
 
