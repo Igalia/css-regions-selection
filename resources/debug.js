@@ -91,6 +91,14 @@ function selectText(repeat) {
     }, 500);
 }
 
+function fillDescriptionOnlyRegions() {
+    var lastWord = document.getElementById("lastWord");
+    lastWord.innerHTML = "word" + (counter - 1);
+
+    var regionsCounter = document.getElementById("regionsCounter");
+    regionsCounter.innerHTML = counter;
+}
+
 function fillDescription() {
     var lastWord = document.getElementById("lastWord");
     lastWord.innerHTML = "word" + (counter - 1);
@@ -107,6 +115,37 @@ function fillDescriptionNoRegions() {
 
     var regularDivsCounter = document.getElementById("regularDivsCounter");
     regularDivsCounter.innerHTML = counter;
+}
+
+function createOnlyRegionsDocument() {
+    var body = document.body;
+
+    for (var i = 0; i < counter; i ++) {
+        var inDiv = document.createElement("div");
+        inDiv.className = "region";
+
+        body.appendChild(inDiv);
+    }
+
+    var source = document.createElement("div");
+    source.id = "source";
+
+    for (var i = 0; i < counter; i++) {
+        var word = document.createElement("span");
+        word.id = "word" + i;
+        word.className = "token";
+        word.innerHTML = "word" + i;
+
+        var breakDiv = document.createElement("div");
+        breakDiv.className = "break";
+
+        source.appendChild(document.createTextNode("inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region "));
+        source.appendChild(word);
+        source.appendChild(document.createTextNode(" inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region"));
+        source.appendChild(breakDiv);
+    }
+
+    body.appendChild(source);
 }
 
 function createRegionsDocument() {
