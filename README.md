@@ -7,3 +7,5 @@ using [CSS Regions](http://www.w3.org/TR/css3-regions/).
 
 For each use case we explain different test cases with the expected, actual and
 visual result.
+
+It also includes examples to check performance of selection in CSS Regions.
