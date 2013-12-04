@@ -41,9 +41,9 @@ function getSelectedText()
 function select(fromId, toId) {
     var sel = window.getSelection();
 
-    var base = document.getElementById(fromId);
     var extent = document.getElementById(toId);
-    sel.setBaseAndExtent(base, 0, extent, 0);
+    sel.collapse(document.getElementById(fromId), 0);
+    sel.extend(document.getElementById(toId), 0);
 }
 
 function showHideTests(id) {
@@ -62,17 +62,21 @@ var values = new Array();
 function selectText(repeat) {
     var selection = window.getSelection();
 
-    var base = document.getElementById("word0");
-    var extent = document.getElementById("word" + (counter - 1));
     var summary = document.getElementById("summary");
     var average = document.getElementById("average");
 
     // Reset selection
-    selection.setBaseAndExtent(summary, 0, summary, 0);
+    selection.collapse(summary, 0);
+    selection.extend(summary, 0);
+
+    selection.collapse(document.getElementById("word0"), 0);
 
     setTimeout(function() {
         var start = new Date().getTime();
-        selection.setBaseAndExtent(base, 0, extent, 0);
+
+        for (var i = 0; i < counter; i++)
+            selection.extend(document.getElementById("word" + i), 0);
+
         var end = new Date().getTime();
 
         var time = end - start;
