@@ -55,7 +55,7 @@ document.onmouseup = getSelectedText;
 
 var counter = window.location.search.replace("?", "");
 if (!counter)
-    counter = 1000;
+    counter = 100;
 
 var values = new Array();
 

@@ -26,8 +26,8 @@
 <body>
     <div id="description">
         <h1>Performance test for selection in CSS Regions</h1>
-        <p>Every time you click the <em>Select</em> button, the test performs a selection using JavaScript method <tt>setBaseAndExtent</tt> from <span class="token">word0</span> to <span class="token" id="lastWord"></span>. Then it shows the time requiered to execute the selection and calculates the average for all the selections done.</p>
-        <p>By default this test has 1000 regions but you can modify this number with a <tt>GET</tt> param. For example, for 2000 regions you should add <tt>?2000</tt> to the URL (<a href="?2000">see link</a>).</p>
+        <p>Every time you click the <em>Select</em> button, the test performs a selection using JavaScript methods <tt><a href="https://dvcs.w3.org/hg/editing/raw-file/tip/editing.html#dom-selection-collapse">collapse</a></tt> and <tt><a href="https://dvcs.w3.org/hg/editing/raw-file/tip/editing.html#dom-selection-extend">extend</a></tt> from <span class="token">word0</span> to <span class="token" id="lastWord"></span>, passing through the rest of keywords. Then it shows the time requiered to execute the selection and calculates the average for all the selections done.</p>
+        <p>By default this test has 100 regions but you can modify this number with a <tt>GET</tt> param. For example, for 1000 regions you should add <tt>?1000</tt> to the URL (<a href="?1000">see link</a>).</p>
         <p>
             <button onClick="selectText(1);">Select</button>
             <button onClick="selectText(10);">Select (x10)</button>
