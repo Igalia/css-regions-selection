@@ -74,7 +74,7 @@ function selectText(repeat) {
     setTimeout(function() {
         var start = new Date().getTime();
 
-        for (var i = 0; i < counter; i++)
+        for (var i = 1; i < counter; i++)
             selection.extend(document.getElementById("word" + i), 0);
 
         var end = new Date().getTime();
@@ -227,4 +227,58 @@ function createNoRegionsDocument() {
         body.appendChild(outDiv);
         body.appendChild(inDiv);
     }
+}
+
+function createOnlyRegions2FlowThreadsDocument() {
+    var body = document.body;
+
+    for (var i = 0; i < counter; i += 2) {
+        var inDiv1 = document.createElement("div");
+        inDiv1.id = "region-1";
+        inDiv1.className = "region";
+
+        var inDiv2 = document.createElement("div");
+        inDiv2.id = "region-2";
+        inDiv2.className = "region";
+
+        body.appendChild(inDiv1);
+        body.appendChild(inDiv2);
+    }
+
+    var source1 = document.createElement("div");
+    source1.id = "source-1";
+
+    var source2 = document.createElement("div");
+    source2.id = "source-2";
+
+    for (var i = 0; i < counter; i += 2) {
+        var word1 = document.createElement("span");
+        word1.id = "word" + i;
+        word1.className = "token";
+        word1.innerHTML = "word" + i;
+
+        var breakDiv1 = document.createElement("div");
+        breakDiv1.className = "break";
+
+        source1.appendChild(document.createTextNode("inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region "));
+        source1.appendChild(word1);
+        source1.appendChild(document.createTextNode(" inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region"));
+        source1.appendChild(breakDiv1);
+
+        var word2 = document.createElement("span");
+        word2.id = "word" + (i + 1);
+        word2.className = "token";
+        word2.innerHTML = "word" + (i + 1);
+
+        var breakDiv2 = document.createElement("div");
+        breakDiv2.className = "break";
+
+        source2.appendChild(document.createTextNode("inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region "));
+        source2.appendChild(word2);
+        source2.appendChild(document.createTextNode(" inside region inside region inside region inside region inside region inside region inside region inside region inside region inside region"));
+        source2.appendChild(breakDiv2);
+    }
+
+    body.appendChild(source1);
+    body.appendChild(source2);
 }

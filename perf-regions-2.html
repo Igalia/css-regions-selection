@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="resources/debug.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/style.css"></link>
+
+    <style>
+        #source-1 {
+            -webkit-flow-into: flow-1;
+        }
+
+        #region-1 {
+            -webkit-flow-from: flow-1;
+            height: auto;
+        }
+
+        #source-2 {
+            -webkit-flow-into: flow-2;
+        }
+
+        #region-2 {
+            -webkit-flow-from: flow-2;
+            height: auto;
+            background-color: lightsalmon;
+        }
+
+        .break {
+            -webkit-region-break-after: always;
+        }
+    </style>
+    <script>
+        document.onmouseup = null;
+    </script>
+</head>
+<body>
+    <div id="description">
+        <h1>Performance test for selection in CSS Regions with 2 flow threads</h1>
+        <p>Every time you click the <em>Select</em> button, the test performs a selection using JavaScript methods <tt><a href="https://dvcs.w3.org/hg/editing/raw-file/tip/editing.html#dom-selection-collapse">collapse</a></tt> and <tt><a href="https://dvcs.w3.org/hg/editing/raw-file/tip/editing.html#dom-selection-extend">extend</a></tt> from <span class="token">word0</span> to <span class="token" id="lastWord"></span>, passing through the rest of keywords. Then it shows the time required to execute the selection and calculates the average for all the selections done.</p>
+        <p>By default this test has 100 regions but you can modify this number with a <tt>GET</tt> param. For example, for 1000 regions you should add <tt>?1000</tt> to the URL (<a href="?1000">see link</a>).</p>
+        <p>
+            <button onClick="selectText(1);">Select</button>
+            <button onClick="selectText(10);">Select (x10)</button>
+            <button onClick="selectText(20);">Select (x20)</button>
+        </p>
+        <table id="summary">
+            <tr><th>Number of regions</th><td id="regionsCounter"></td></tr>
+            <tr><th>Average</th><td id="average"></td></tr>
+        </table>
+    </div>
+    <script>
+        fillDescriptionOnlyRegions();
+        createOnlyRegions2FlowThreadsDocument();
+    </script>
+</body>
+</html>
