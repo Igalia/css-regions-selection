@@ -95,6 +95,74 @@ function selectText(repeat) {
     }, 500);
 }
 
+function selectDirectly(repeat) {
+    var selection = window.getSelection();
+
+    var summary = document.getElementById("summary");
+    var average = document.getElementById("average");
+
+    // Reset selection
+    selection.collapse(summary, 0);
+    selection.extend(summary, 0);
+
+    selection.collapse(document.getElementById("word0"), 0);
+
+    setTimeout(function() {
+        var start = new Date().getTime();
+
+        selection.extend(document.getElementById("word" + (counter - 1)), 0);
+
+        var end = new Date().getTime();
+
+        var time = end - start;
+
+        values.push(time);
+
+        var tr = document.createElement("tr");
+        tr.innerHTML = "<th>Time<sup>" + values.length + "</sup></th><td class=\"time\">" + time + " ms</td>";
+        summary.appendChild(tr);
+
+        var sum = values.reduce(function(previousValue, currentValue) { return previousValue + currentValue; });
+        average.innerHTML = Math.round(sum / values.length) + " ms";
+
+        if (repeat > 1)
+            selectDirectly(repeat - 1);
+    }, 500);
+}
+
+function selectAll(repeat) {
+    var selection = window.getSelection();
+
+    var summary = document.getElementById("summary");
+    var average = document.getElementById("average");
+
+    // Reset selection
+    selection.collapse(summary, 0);
+    selection.extend(summary, 0);
+
+    setTimeout(function() {
+        var start = new Date().getTime();
+
+        document.execCommand('SelectAll');
+
+        var end = new Date().getTime();
+
+        var time = end - start;
+
+        values.push(time);
+
+        var tr = document.createElement("tr");
+        tr.innerHTML = "<th>Time<sup>" + values.length + "</sup></th><td class=\"time\">" + time + " ms</td>";
+        summary.appendChild(tr);
+
+        var sum = values.reduce(function(previousValue, currentValue) { return previousValue + currentValue; });
+        average.innerHTML = Math.round(sum / values.length) + " ms";
+
+        if (repeat > 1)
+            selectAll(repeat - 1);
+    }, 500);
+}
+
 function fillDescriptionOnlyRegions() {
     var lastWord = document.getElementById("lastWord");
     lastWord.innerHTML = "word" + (counter - 1);
